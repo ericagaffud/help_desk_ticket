@@ -48,7 +48,7 @@
 <script>
 import Header from './Header.vue'
 import { required } from 'vuelidate/lib/validators'
-import { fetchIssues, myIssue } from './ThisMethods'
+/* import {  myIssue } from './ThisMethods' */
 
 export default {
     name: 'Hardware',
@@ -70,6 +70,7 @@ export default {
         },
         onHardwareSelect(hardwareSub) {
             if(hardwareSub) {
+                this.$store.commit('hardwareStore', {hardwareSub: this.hardwareSub})
                 this.$router.push({ path: '/subpage'})
             }
             console.log('No data')
@@ -80,21 +81,15 @@ export default {
             this.issue()
         },
 
-        async issue() {
+/*         async issue() {
             const newIssue = {
                 id: Math.floor(Math.random() * 100000),
                 hardwareSub: this.softwareSub,
             }
             const issue = await myIssue(newIssue)
             console.log(issue)
-        },
+        }, */
     },
-    created() {
-        fetchIssues()
-        .then ( value => {
-            this.issues = value
-        })
-    }
 }
 </script>
 

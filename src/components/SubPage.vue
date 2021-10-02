@@ -80,19 +80,33 @@ export default {
         },
 
         onFinal() {
-            this.$router.push({ path: '/finalpage'})
+           /*  let formData = new FormData() 
+            formData.append("photo", this.$refs.fileStore.files[0])
+            this.file1 =  formData */
 
+            const temp = {
+                file1: this.file1,
+                description: this.description
+            }
+            this.$store.commit('subStore', temp)
+            
+            this.$router.push({ path: '/finalpage'})
             this.submitIssue()
         },
+        
         async submitIssue() {
             const newIssue = {
                 id: Math.floor(Math.random() * 100000),
-                email: this.email,
+              /*   email: this.email,
                 office: this.office,
                 client: this.client,
                 number: this.number,
-                selectProblem: this.selectProblem
+                selectProblem: this.selectProblem, */
+                file1: this.file1,
+                description: this.description
             }
+            console.log(this.$store.state.email, 'Email')
+
             const issue = await myIssue(newIssue)
             console.log(issue)
 

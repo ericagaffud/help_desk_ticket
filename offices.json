@@ -234,21 +234,9 @@
   ],
   "issues": [
     {
-      "id": 43976,
-      "softwareSub": "D"
-    },
-    {
-      "id": 68365
-    },
-    {
-      "id": 58856
-    },
-    {
-      "id": 59865
-    },
-    {
-      "id": 81665,
-      "softwareSub": "B"
+      "id": 29987,
+      "file1": null,
+      "description": "asrdfgasdf"
     }
   ]
 }

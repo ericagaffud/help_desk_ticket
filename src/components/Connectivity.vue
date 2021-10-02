@@ -47,7 +47,7 @@
 <script>
 import Header from './Header.vue'
 import { required } from 'vuelidate/lib/validators'
-import { fetchIssues, myIssue } from './ThisMethods'
+/* import {  myIssue } from './ThisMethods' */
 
 export default {
     name: 'Connectivity',
@@ -69,6 +69,7 @@ export default {
         },
         onConnectSelect(connectivitySub) {
             if(connectivitySub) {
+                this.$store.commit('connectivityStore', {connectivitySub: this.connectivitySub}) 
                 this.$router.push({ path: '/subpage'})
             }
             console.log('No data')
@@ -79,21 +80,15 @@ export default {
             this.issue()
         },
 
-        async issue() {
+/*         async issue() {
             const newIssue = {
                 id: Math.floor(Math.random() * 100000),
                 connectivitySub: this.connectivitySub,
             }
             const issue = await myIssue(newIssue)
             console.log(issue)
-        },
+        }, */
     },
-    created() {
-        fetchIssues()
-        .then ( value => {
-            this.issues = value
-        })
-    }
 }
 </script>
 

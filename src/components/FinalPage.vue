@@ -9,14 +9,14 @@
             <div class="enclose sidebg">
                 <h4>Your response was being submitted.</h4>
                 <p>These are your submitted data.</p>
-                <h6>Email:</h6>
-                <h6>Office:</h6>
-                <h6>Name:</h6>
-                <h6>Number:</h6>
-                <h6>Problem Category:</h6>
-                <h6><span style="margin-left:15px"></span>Issue:</h6>
+                <h6>Email: </h6>
+                <h6>Office: </h6>
+                <h6>Name: </h6>
+                <h6>Number: </h6>
+                <h6>Problem Category: </h6>
+                <h6><span style="margin-left:15px"></span>Issue: </h6>
                 <h6><span style="margin-left:15px"></span>Description:</h6>
-                <h6><span style="margin-left:15px"></span>Picute:</h6>
+                <h6><span style="margin-left:15px"></span>Picture:</h6>
             </div>
             <div>
                 <b-row>
@@ -43,7 +43,6 @@
 
 <script>
 import Header from './Header.vue'
-import { myIssue } from './ThisMethods'
 
 export default {
     name: 'FinalPage',
@@ -51,18 +50,6 @@ export default {
         Header
     },
     methods: {
-        async issue() {
-            const newIssue = {
-                id: Math.floor(Math.random() * 100000),
-                email: this.email,
-                office: this.office,
-                client: this.client,
-                number: this.number,
-                selectProblem: this.selectProblem
-            }
-            const issue = await myIssue(newIssue)
-            console.log(issue)
-        },
     }
 }
 </script>

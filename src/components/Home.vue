@@ -9,7 +9,7 @@
               <form @submit.prevent="issue()">
                 <div class="enclose sidebg">
                     <b-form-group
-                    id="emailfield"
+                    id="email"
                     description="Please enter a valid email"
                     label-for="email"
                     >
@@ -21,7 +21,7 @@
 
                 <div class="enclose sidebg">
                     <b-form-group 
-                    id="officefield"
+                    id="office"
                     label-for="office">
                     <label> Office <span style="color:red">*</span> </label><br><br>
                     <b-form-select
@@ -29,21 +29,23 @@
                         name="office"
                         class="w-75 p-2"
                         label-cols-lg="4"
-                        v-model.trim="$v.office.$model" :class="{'is-invalid': validationStatus($v.office)}">
+                        v-model.trim="$v.office.$model"
+                        :class="{'is-invalid': validationStatus($v.office)}">
                         <option value="" disabled> Select Office </option>
                         <option :value="office.name" :key="office.name" v-for="office in offices"> {{ office.name }} </option>
+                        <div v-if="!$v.office.required" class="invalid-feedback">This field is required.</div>
                     </b-form-select>
-                    <div v-if="!$v.office.required" class="invalid-feedback">This field is required.</div>
+                    
                     </b-form-group><br>
                 </div>
 
                 <div class="enclose sidebg">
                     <b-form-group
-                    id="clientfield"
+                    id="client"
                     label-for="client"
                     >
                     <label> Client Name <span style="color:red">*</span> </label>
-                    <b-form-input id="client" name="client" v-model="client" v-model.trim="$v.client.$model" :class="{'is-invalid': validationStatus($v.client)}"></b-form-input>
+                    <b-form-input ref="nameInput" id="client" name="client" v-model="client" v-model.trim="$v.client.$model" :class="{'is-invalid': validationStatus($v.client)}"></b-form-input>
                     <div v-if="!$v.client.required" class="invalid-feedback">This field is required.</div>
                     </b-form-group>      
                 </div>
@@ -55,18 +57,18 @@
                     label-for="number"
                     >
                     <label> Phone Number <span style="color:red">*</span> </label>
-                    <b-form-input id="number" name="number" v-model="number" v-model.trim="$v.number.$model" :class="{'is-invalid': validationStatus($v.number)}"></b-form-input>
+                    <b-form-input ref="numberInput" id="number" name="number" v-model="number" v-model.trim="$v.number.$model" :class="{'is-invalid': validationStatus($v.number)}"></b-form-input>
                     <div v-if="!$v.number.required" class="invalid-feedback">This field is required.</div>
                     </b-form-group>
                 </div>
 
                 <div class="enclose sidebg">
-                    <b-form-group v-slot="{ ariaDescribedby }" id="problem" v-model="selectProblem">
+                    <b-form-group v-slot="{ ariaDescribedby }" id="problem" label-for="problem" v-model="selectProblem" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}">
                         <label> Problem Category <span style="color:red">*</span></label><br>
                         <p class="plabel">Please check from the boxes below the category of the problem.</p>
-                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" name="Software" value="Software" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Software</b-form-radio><br>
-                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" name="Hardware" value="Hardware" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Hardware</b-form-radio><br>
-                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" name="Connectivity" value="Connectivity" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Connectivity</b-form-radio><br>
+                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" :mandatory="false" name="Software" value="Software" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Software</b-form-radio><br>
+                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" :mandatory="false" name="Hardware" value="Hardware" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Hardware</b-form-radio><br>
+                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" :mandatory="false" name="Connectivity" value="Connectivity" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Connectivity</b-form-radio><br>
                         <div v-if="!$v.selectProblem.required" class="invalid-feedback"> Please choose one</div>
                     </b-form-group>
                 </div>
@@ -80,7 +82,9 @@
                         <b-progress height="10px" :value="value" class="mb-3 mt-3"></b-progress>
                     </b-col>
                     <b-col class="mt-2"> Page 1 of 4</b-col>
-                    <b-col class="mt-2"> <p>Clear Form</p> </b-col>
+                    <b-col>
+                      <b-button variant="outline-primary" @click="clearForm()"> <span style="font:x-small">Clear</span>  </b-button>
+                    </b-col>
                 </b-row>
               </form>
           </b-col>
@@ -93,9 +97,8 @@
 <script>
 import Header from './Header.vue'
 import { required } from 'vuelidate/lib/validators'
-import { mapActions } from "vuex";
-import { myIssue } from './ThisMethods';
-/*import { fetchIssues,  myIssue  } from './ThisMethods'*/
+/* import { myIssue } from './ThisMethods' */
+/* import { fetchIssues,  myIssue  } from './ThisMethods' */
 
 export default {
     name: 'Home',
@@ -130,10 +133,9 @@ export default {
         .catch(function(err) {
             console.log(err)
         });
+
     },
     methods: {
-      ...mapActions([myIssue]),
-
       validationStatus: function(validation) {
           return typeof validation != "undefined" ? validation.$error : false;
       },
@@ -153,12 +155,52 @@ export default {
       issue() {
           this.$v.$touch()
           if (this.$v.$pendding || this.$v.$error) return
-          this.$v.$reset()    
+          this.$v.$reset()
+              
+          //vuex interrupts
+          const temp = {
+            email: this.email,
+            office: this.office,
+            client: this.client, 
+            number: this.number, 
+            selectProblem: this.selectProblem
+          }
+          this.$store.commit('homeStore', temp)
 
           this.onSelectRad()
       },
+
+ /*      async myIssue() {
+          const newIssue = {
+              id: Math.floor(Math.random() * 100000),
+              email: this.email,
+              office: this.office,
+              client: this.client,
+              number: this.number,
+              selectProblem: this.selectProblem,
+          }
+          const issue = await myIssue(newIssue)
+          console.log(issue)
+      }, */
+
+      clearForm(){
+        this.$v.$touch()
+        if (this.$v.$pendding || this.$v.$error) return
+        alert('Clear Form')
+
+        this.$v.$reset()
+        this.email = null
+        this.office = null
+        this.client = null
+        this.number = null
+        this.selectProblem = null
+      }
     },
-/*     created() {
+
+/*    created: function() {
+      this.issue()
+    }
+     created() {
       fetchIssues()
       .then ( value => {
           this.issues = value
@@ -218,4 +260,5 @@ form-radio {
 button {
   width: 50%;
 }
+
 </style>

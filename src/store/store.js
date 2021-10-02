@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
 export default new Vuex.Store({
     state: {
         email: '',
@@ -10,41 +9,37 @@ export default new Vuex.Store({
         client: '',
         number: '',
         selectProblem: '',
-        issues: [],
-        offices: [],
+        softwareSub: '',
+        hardwareSub: '',
+        connectivitySub: '',
+        file1: null, 
+        description: '' 
     },
-    mutations: {
-      //syncrous
-/*       setCurrentJoke(state, payload) {
-        state.currentJoke = payload;
-        state.allJokes.push(payload);
-      } */
-      setIssue(state, newIssue) {
-        state.email = newIssue
-        state.office = newIssue
-        state.client = newIssue
-        state.number = newIssue
-        state.selectProblem = newIssue
-        state.issues.push(newIssue)
-      }
-    },
-    actions: {
-      //asyncronous
-/*       async setCurrentJoke(state) {
-        const joke = await fetch(url, { headers });
-        const j = await joke.json();
-        state.commit("setCurrentJoke", j.joke);
-      } */
 
-      async myIssue(state) {
-        const res = await fetch('http://localhost:5000/issues')
-        const data = await res.json()
-        state.commit("myIssue", data.res)
+    mutations:{
+      homeStore(state, payload){
+        state.email = payload
+        state.office = payload
+        state.client = payload
+        state.number = payload
+        state.selectProblem = payload
+      },
+
+      softwareStore(state, payload){
+        state.softwareSub = payload.softwareSub
+      },
+
+      hardwareStore(state, payload){
+        state.hardwareSub = payload.hardwareSub
+      },
+
+      connectivityStore(state, payload){
+        state.connectivitySub = payload.connectivitySub
+      },
+
+      subStore(state, payload){
+        state.file1 = payload.file1
+        state.description = payload.description
       }
-    },
-    modules: {},
-    getters: {
-      getCurrentJoke: state => state.currentJoke,
-      getAllJokes: state => state.allJokes
     }
   });
