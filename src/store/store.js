@@ -9,20 +9,26 @@ export default new Vuex.Store({
         client: '',
         number: '',
         selectProblem: '',
+
         softwareSub: '',
+
         hardwareSub: '',
+
         connectivitySub: '',
+
         file1: null, 
         description: '' 
     },
 
     mutations:{
+
       homeStore(state, payload){
-        state.email = payload
-        state.office = payload
-        state.client = payload
-        state.number = payload
-        state.selectProblem = payload
+        state.email = payload.email
+        state.office = payload.office
+        state.client = payload.client
+        state.number = payload.number
+        state.selectProblem = payload.selectProblem
+
       },
 
       softwareStore(state, payload){
@@ -41,5 +47,6 @@ export default new Vuex.Store({
         state.file1 = payload.file1
         state.description = payload.description
       }
+      
     }
   });

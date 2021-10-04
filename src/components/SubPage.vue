@@ -6,7 +6,7 @@
             <div class="enclose headerbg">
             <Header /> 
             </div>
-            <form @submit.prevent="onFinal">
+            <form @submit.prevent="onFinal" ref="myForm">
                 <div class="enclose sidebg">
                     <b-form-group
                         id="name"
@@ -34,18 +34,20 @@
                 <input id="f_hidden" type="hidden" value="hidden-field-value" />
                 </div>
                 <b-row>
-                    <b-col cols="5">
+                    <b-col cols="4">
                         <b-nav pills fill>
-                            <b-button variant="primary" @click="$router.go(-1)" active> Back </b-button>
+                            <b-button variant="danger" @click="$router.go(-1)" active class="drivebutton"> Back </b-button>
                             <b-nav-item disabled></b-nav-item>
-                            <b-button variant="primary" type="submit" active> Submit </b-button>
+                            <b-button variant="danger" type="submit" active class="drivebutton"> Submit </b-button>
                         </b-nav>
                     </b-col>
-                    <b-col>
-                        <b-progress height="10px" :value="value" class="mb-3 mt-3"></b-progress>
+                    <b-col cols="3">
+                        <b-progress height="10px" variant="danger" :value="value" class="mb-3 mt-3"></b-progress>
                     </b-col>
-                    <b-col class="mt-2"> Page 3 of 4</b-col>
-                    <b-col class="mt-2"> <p>Clear Form</p> </b-col>
+                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 3 of 4</span> </b-col>
+                    <b-col cols="3"> 
+                        <b-button @click="clearForm" variant="outline-danger"> Clear Form  </b-button>
+                    </b-col>
                 </b-row>
             </form>
           </b-col>
@@ -67,13 +69,18 @@ export default {
     data() {
         return {
             value: 75,
-            file1: null,
+            file: null,
             description: ''
         }
     },
     validations: {
         description: { required }
     },
+
+    mounted: function() {
+        this.store()
+    },
+
     methods: {
         validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
@@ -89,32 +96,40 @@ export default {
                 description: this.description
             }
             this.$store.commit('subStore', temp)
-            
             this.$router.push({ path: '/finalpage'})
+
+            this.$v.$touch()
+            if (this.$v.$pendding || this.$v.$error) return
+            this.$v.$reset()
+            alert('Submit')
+            
             this.submitIssue()
         },
-        
         async submitIssue() {
             const newIssue = {
                 id: Math.floor(Math.random() * 100000),
-              /*   email: this.email,
-                office: this.office,
-                client: this.client,
-                number: this.number,
-                selectProblem: this.selectProblem, */
-                file1: this.file1,
-                description: this.description
+                email: this.$store.state.email,
+                office: this.$store.state.office,
+                client: this.$store.state.client,
+                number: this.$store.state.number,
+                selectProblem: this.$store.state.selectProblem,
+                file1: this.$store.state.file1,
+                description: this.$store.state.description
             }
             console.log(this.$store.state.email, 'Email')
 
             const issue = await myIssue(newIssue)
             console.log(issue)
+        },
+        store() {
+            this.file = this.$store.state.file
+            this.description = this.$store.state.file
+        },
 
-            this.$v.$touch()
-            if (this.$v.$pendding || this.$v.$error) return
-            this.$v.$reset()
-            
-            }
+        clearForm(){
+            alert('Clear Form')
+            this.$refs.myForm.reset()
+        },
     }
 }
 </script>
@@ -162,7 +177,7 @@ form-file {
     align-items: center;
 }
 
-button {
+.drivebutton {
   width: 40%;
 }
 </style>

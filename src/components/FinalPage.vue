@@ -9,14 +9,14 @@
             <div class="enclose sidebg">
                 <h4>Your response was being submitted.</h4>
                 <p>These are your submitted data.</p>
-                <h6>Email: </h6>
-                <h6>Office: </h6>
-                <h6>Name: </h6>
-                <h6>Number: </h6>
-                <h6>Problem Category: </h6>
-                <h6><span style="margin-left:15px"></span>Issue: </h6>
-                <h6><span style="margin-left:15px"></span>Description:</h6>
-                <h6><span style="margin-left:15px"></span>Picture:</h6>
+                <h5>Email: <strong> {{ this.$store.state.email }} </strong></h5>
+                <h5>Office: <strong> {{ this.$store.state.office }} </strong></h5>
+                <h5>Name: <strong> {{ this.$store.state.name }} </strong></h5>
+                <h5>Number: <strong> {{ this.$store.state.number }} </strong></h5>
+                <h5>Problem Category </h5>
+                <h5><span style="margin-left:15px"></span>Issue: </h5>
+                <h5><span style="margin-left:15px"></span>Description: <strong> {{ this.$store.state.description }} </strong></h5>
+                <h5><span style="margin-left:15px"></span>Picture: </h5>
             </div>
             <div>
                 <b-row>
