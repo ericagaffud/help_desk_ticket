@@ -9,13 +9,9 @@ export default new Vuex.Store({
         client: '',
         number: '',
         selectProblem: '',
-
         softwareSub: '',
-
         hardwareSub: '',
-
         connectivitySub: '',
-
         file1: null, 
         description: '' 
     },

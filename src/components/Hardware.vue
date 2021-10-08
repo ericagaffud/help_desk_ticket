@@ -11,12 +11,12 @@
                     <b-form-group v-slot="{ ariaDescribedby }">
                         <label> Hardware </label><br>
                         <p class="plabel"> <span style="color:red">*</span> Choose multiple option if necessary </p>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="A" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Laptop </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="B" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Keyboard </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="C" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Monitor </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="D" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Mouse </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="E" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Printer </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="F" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Laptop" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Laptop </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Keyboard" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Keyboard </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Monitor" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Monitor </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Mouse" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Mouse </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Printer" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Printer </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Others" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
                         <b-input id="other" name="other"></b-input>
                         <div v-if="!$v.hardwareSub.required" class="invalid-feedback"> Please choose one</div>
                     </b-form-group>
@@ -32,7 +32,7 @@
                     <b-col cols="3">
                         <b-progress height="10px" variant="danger" :value="value" class="mb-3 mt-3"></b-progress>
                     </b-col>
-                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 2 of 4</span> </b-col>
+                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 2 of 3</span> </b-col>
                     <b-col cols="3"> 
                         <b-button @click="clearForm" variant="outline-danger"> Clear Form  </b-button>
                     </b-col>
@@ -55,7 +55,7 @@ export default {
     },
     data() {
         return {
-            value: 50,
+            value: 66.66,
             hardwareSub:''
         }
     },
@@ -117,13 +117,9 @@ input {
     border-color: gainsboro;
 }
 
-.form-radio {
-    padding-left: 20px;
-}
-
 .headerbg {
     border: solid pink;
-    border-width: 15px 0 0;
+    border-width: 15px 1px 1px;
 }
 
 .sidebg {

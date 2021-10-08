@@ -44,7 +44,7 @@
                     <b-col cols="3">
                         <b-progress height="10px" variant="danger" :value="value" class="mb-3 mt-3"></b-progress>
                     </b-col>
-                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 3 of 4</span> </b-col>
+                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 3 of 3</span> </b-col>
                     <b-col cols="3"> 
                         <b-button @click="clearForm" variant="outline-danger"> Clear Form  </b-button>
                     </b-col>
@@ -68,7 +68,7 @@ export default {
     },
     data() {
         return {
-            value: 75,
+            value: 100,
             file: null,
             description: ''
         }
@@ -107,14 +107,15 @@ export default {
         },
         async submitIssue() {
             const newIssue = {
-                id: Math.floor(Math.random() * 100000),
                 email: this.$store.state.email,
                 office: this.$store.state.office,
                 client: this.$store.state.client,
                 number: this.$store.state.number,
                 selectProblem: this.$store.state.selectProblem,
-                file1: this.$store.state.file1,
-                description: this.$store.state.description
+                issue: this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub,
+                description: this.$store.state.description,
+                file1: this.$store.state.file1
+                
             }
             console.log(this.$store.state.email, 'Email')
 
@@ -160,13 +161,9 @@ input {
     border-color: gainsboro;
 }
 
-.form-radio {
-    padding-left: 20px;
-}
-
 .headerbg {
     border: solid pink;
-    border-width: 15px 0 0;
+    border-width: 15px 1px 1px;
 }
 
 .sidebg {

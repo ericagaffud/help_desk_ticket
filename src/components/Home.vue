@@ -4,7 +4,7 @@
           <b-col></b-col>
           <b-col cols="6">
               <div class="enclose headerbg">
-                  <Header />
+                <Header />
               </div>
               <form @submit.prevent="issue()" ref="myForm">
                 <div class="enclose sidebg">
@@ -32,7 +32,7 @@
                         v-model="office"
                         v-model.trim="$v.office.$model"
                         :class="{'is-invalid': validationStatus($v.office)}">
-                        <option value="" disabled> Select Office </option>
+                        <option value=""> Select Office </option>
                         <option :value="office.name" :key="office.name" v-for="office in offices"> {{ office.name }} </option>
                         <div v-if="!$v.office.required" class="invalid-feedback">This field is required.</div>
                     </b-form-select>
@@ -63,15 +63,16 @@
                 </div>
 
                 <div class="enclose sidebg">
-                    <b-form-group v-slot="{ ariaDescribedby }" id="problem" label-for="problem">
+                    <b-form-radio-group v-slot="{ ariaDescribedby }" v-model="selectProblem">
                         <label> Problem Category <span style="color:red">*</span></label><br>
                         <p class="plabel">Please check from the boxes below the category of the problem.</p>
-                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" name="Software" value="Software" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Software</b-form-radio><br>
-                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" name="Hardware" value="Hardware" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Hardware</b-form-radio><br>
-                        <b-form-radio id="problem" v-model="selectProblem" :aria-describedby="ariaDescribedby" name="Connectivity" value="Connectivity" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Connectivity</b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="selectProblem" name="Software" value="Software" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Software </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="selectProblem" name="Hardware" value="Hardware" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Hardware </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="selectProblem" name="Connectivity" value="Connectivity" v-model.trim="$v.selectProblem.$model" :class="{'is-invalid': validationStatus($v.selectProblem)}"> <span style="margin-left:10px"></span> Connectivity </b-form-radio><br>
                         <div v-if="!$v.selectProblem.required" class="invalid-feedback"> Please choose one</div>
-                    </b-form-group>
+                    </b-form-radio-group>
                 </div>
+
                 <b-row>
                     <b-col cols="4">
                       <b-nav pills>
@@ -81,7 +82,7 @@
                     <b-col cols="3">
                         <b-progress height="10px" variant="danger" :value="value" class="mb-3 mt-3"></b-progress>
                     </b-col>
-                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 1 of 4</span> </b-col>
+                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 1 of 3</span> </b-col>
                     <b-col cols="3">
                       <b-button @click="clearForm" variant="outline-danger"> Clear Form </b-button>
                     </b-col>
@@ -112,7 +113,7 @@ export default {
         selectProblem: '',
         issues: [],
         offices: [],
-        value: 25
+        value: 33.33
       }
     },
     validations: {
@@ -203,20 +204,12 @@ input {
   width: 75%;
 }
 
-/* input:focus {
-  border-color: violet;
-} */
-
 select {
   width: 50%;
 }
 
 .plabel {
   font-size: small;
-}
-
-form-radio {
-    padding-left: 20px;
 }
 
 .headerbg {
@@ -231,24 +224,5 @@ form-radio {
 button {
   width: 100%;
 }
-
-/* .cbutton {
-  padding: 0%;
-  border: 0;
-  background: none;
-  color: rebeccapurple;
-  font-size: large;  
-}
-
-.cbutton:hover {
-  background: none;
-  transform: scale(0.88);
-  color: rebeccapurple;
-}
-
-.cbutton:active {
-  background: none;
-  color: rebeccapurple;
-} */
 
 </style>

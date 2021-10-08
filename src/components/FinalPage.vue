@@ -8,28 +8,43 @@
             </div>
             <div class="enclose sidebg">
                 <h4>Your response was being submitted.</h4>
-                <p>These are your submitted data.</p>
-                <h5>Email: <strong> {{ this.$store.state.email }} </strong></h5>
-                <h5>Office: <strong> {{ this.$store.state.office }} </strong></h5>
-                <h5>Name: <strong> {{ this.$store.state.name }} </strong></h5>
-                <h5>Number: <strong> {{ this.$store.state.number }} </strong></h5>
-                <h5>Problem Category </h5>
-                <h5><span style="margin-left:15px"></span>Issue: </h5>
-                <h5><span style="margin-left:15px"></span>Description: <strong> {{ this.$store.state.description }} </strong></h5>
-                <h5><span style="margin-left:15px"></span>Picture: </h5>
+                <p>These are your submitted data.</p><br>
+                <b-row>
+                    <b-col>
+                        <h6> Email: </h6>
+                        <h6> Office: </h6>
+                        <h6> Name: </h6>
+                        <h6> Phone Number: </h6>
+                        <h6> Problem Category </h6>
+                        <h6><span style="margin-left:20px"></span> Issue:</h6>
+                        <h6><span style="margin-left:20px"></span> Description:</h6>
+                        <h6><span style="margin-left:20px"></span> Picture:</h6>
+                    </b-col>
+                    <b-col cols="8">
+                        <input disabled type="text" :value="this.$store.state.email"><br>
+                        <input disabled type="text" :value="this.$store.state.office"><br>
+                        <input disabled type="text" :value="this.$store.state.client"><br>
+                        <input disabled type="text" :value="this.$store.state.number"><br>
+                        <br><br>
+                        <input disabled type="text" :value="this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub"><br>
+                        <input disabled type="text" :value="this.$store.state.description"><br>
+                        <input disabled type="text" :value="this.$store.statepicture">
+                    </b-col>
+                </b-row>
             </div>
             <div>
                 <b-row>
                     <b-col></b-col>
                     <b-col cols="11">
                         <br>
-                        <b-button variant="primary" to="/">
+                        <b-button variant="danger" to="/">
                             Submit Another Response
                         </b-button>
                         <br><br>
-                        <b-button variant="primary" to="/">
+                        <b-button variant="danger" to="/data">
                             See All Data
                         </b-button>
+                        <br><br><br>
                     </b-col>
                     <b-col></b-col>
                 </b-row>
@@ -54,16 +69,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .enclose {
   background-color: white;
   border-radius: 10px;
   margin: 10px;
   padding: 25px 25px;
-}
-
-.progress {
-  background-color: gray;
 }
 
 .headerbg {
@@ -78,6 +89,16 @@ export default {
 .btn {
     align-items: center;
     width: 100%;
-    padding: 12px 16px;
 }
+
+input {
+    margin: 6px;
+    width: 90%;
+    cursor: text;
+}
+
+h6 {
+    margin-bottom: 25px;
+}
+
 </style>

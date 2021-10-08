@@ -6,17 +6,17 @@
             <div class="enclose headerbg">
             <Header /> 
             </div>
-            <form @submit.prevent="onSoftwareSelect(softwareSub)">
+            <form @submit.prevent="onSoftwareSelect(softwareSub)" ref="myForm">
                 <div class="enclose sidebg">
-                    <b-form-group v-slot="{ ariaDescribedby }" ref="myForm">
+                    <b-form-group v-slot="{ ariaDescribedby }" >
                         <label> <strong> Software </strong></label><br>
                         <p class="plabel"> <span style="color:red">*</span> Choose multiple option if necessary </p>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="A" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Operating System </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="B" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Microsoft Office </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="C" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Anti-Virus </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="D" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Software installation </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="E" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Upgrade OS or Software </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="F" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Operating System" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Operating System </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Microsoft Office" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Microsoft Office </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Anti-Virus" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Anti-Virus </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Software Installation" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Software installation </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Upgrade OS or Software" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Upgrade OS or Software </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Others" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
                         <b-input id="other" name="other"></b-input>
                         <div v-if="!$v.softwareSub.required" class="invalid-feedback"> Please choose one </div>
                     </b-form-group>
@@ -32,7 +32,7 @@
                     <b-col cols="3">
                         <b-progress height="10px" variant="danger" :value="value" class="mb-3 mt-3"></b-progress>
                     </b-col>
-                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 2 of 4</span> </b-col>
+                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 2 of 3</span> </b-col>
                     <b-col cols="3"> 
                         <b-button @click="clearForm" variant="outline-danger"> Clear Form  </b-button>
                     </b-col>
@@ -55,7 +55,7 @@ export default {
     },
     data: function() {
         return {
-            value: 50,
+            value: 66.66,
             softwareSub: ''
         }
     },
@@ -118,13 +118,9 @@ input {
     border-color: gainsboro;
 }
 
-.form-radio {
-    padding-left: 20px;
-}
-
 .headerbg {
     border: solid pink;
-    border-width: 15px 0 0;
+    border-width: 15px 1px 1px;
 }
 
 .sidebg {

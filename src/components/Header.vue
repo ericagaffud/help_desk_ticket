@@ -18,13 +18,7 @@ export default {
 </script>
 
 <style scoped>
-.required {
-    color: red;
+h1 {
+    text-align: center;
 }
-
-
-/* .div {
-    border-style: unset;
-    border-top-color: plum;
-} */
 </style>

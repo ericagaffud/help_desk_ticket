@@ -5,6 +5,7 @@ import Hardware from './components/Hardware.vue'
 import Connectivity from './components/Connectivity.vue'
 import SubPage from './components/SubPage.vue'
 import FinalPage from './components/FinalPage.vue'
+import DataPage from './components/DataPage.vue'
 
 
 Vue.use(Router)
@@ -34,6 +35,11 @@ const routes = [
         path:'/finalpage',
         name: 'FinalPage',
         component: FinalPage
+    },
+    {
+        path: '/data',
+        name: DataPage,
+        component: DataPage
     },
     {
         path: '/software',

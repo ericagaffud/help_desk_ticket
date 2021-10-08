@@ -11,9 +11,9 @@
                     <b-form-group v-slot="{ ariaDescribedby }" v-model="connectivitySub">
                         <label> Connectivity </label><br>
                         <p class="plabel"> <span style="color:red">*</span> Choose multiple option if necessary </p>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="A" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> No Internet Connection </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="B" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Forgot WiFi Password </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="C" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Unstable Internet Connectivity </b-form-radio>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="No Internet Connection" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> No Internet Connection </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="Forgot WiFi Password" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Forgot WiFi Password </b-form-radio><br>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="Unstable Internet Connection" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Unstable Internet Connectivity </b-form-radio>
                         <b-input id="other" name="other"></b-input>
                         <div v-if="!$v.connectivitySub.required" class="invalid-feedback"> Please choose one</div>
                     </b-form-group>
@@ -30,7 +30,7 @@
                     <b-col cols="3">
                         <b-progress height="10px" variant="danger" :value="value" class="mb-3 mt-3"></b-progress>
                     </b-col>
-                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 2 of 4</span> </b-col>
+                    <b-col cols="2" class="mt-2"> <span style="font-size:small">Page 2 of 3</span> </b-col>
                     <b-col cols="3"> 
                         <b-button @click="clearForm" variant="outline-danger"> Clear Form  </b-button>
                     </b-col>
@@ -54,7 +54,7 @@ export default {
     },
     data() {
         return {
-            value: 50,
+            value: 66.66,
             connectivitySub:''
         }
     },
@@ -116,13 +116,9 @@ input {
     border-color: gainsboro;
 }
 
-.form-radio {
-    padding-left: 20px;
-}
-
 .headerbg {
     border: solid pink;
-    border-width: 15px 0 0;
+    border-width: 15px 1px 1px;
 }
 
 .sidebg {
