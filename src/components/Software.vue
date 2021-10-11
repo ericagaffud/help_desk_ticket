@@ -16,8 +16,8 @@
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Anti-Virus" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Anti-Virus </b-form-radio><br>
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Software Installation" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Software installation </b-form-radio><br>
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Upgrade OS or Software" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Upgrade OS or Software </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="softwareSub" name="some-radios" value="Others" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
-                        <b-input id="other" name="other"></b-input>
+                        <b-form-radio  @click="enableInputOthers()" :aria-describedby="ariaDescribedby" v-model="softwareSub" value="Others" v-model.trim="$v.softwareSub.$model" :class="{'is-invalid': validationStatus($v.softwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
+                        <b-input id="inputOthers" name="inputOthers" ref="inputOthers"></b-input>
                         <div v-if="!$v.softwareSub.required" class="invalid-feedback"> Please choose one </div>
                     </b-form-group>
                 </div>
@@ -56,7 +56,8 @@ export default {
     data: function() {
         return {
             value: 66.66,
-            softwareSub: ''
+            softwareSub: '',
+            disabledInput: true
         }
     },
     validations:{
@@ -87,7 +88,24 @@ export default {
             alert('Clear Form')
             this.$refs.myForm.reset()
         },
+        enableInputOthers() {
+            setTimeout(function() {
+                this.$refs.inputOthers.focus()
+                console.log(this.$refs.inputOthers, 'Focus')
+            }, 1)
+        }
+/*         enableInputOthers() {
+            if(this.softwareSub == 'Others') {
+                this.disabledInput.disabled = false
+            }
+        } */
+        
     },
+/*     computed: {
+        enableInputOthers() {
+            return this.softwareSub === 'Others'
+        }
+    } */
 }
 </script>
 

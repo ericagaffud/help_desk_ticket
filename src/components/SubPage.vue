@@ -112,7 +112,7 @@ export default {
                 client: this.$store.state.client,
                 number: this.$store.state.number,
                 selectProblem: this.$store.state.selectProblem,
-                issue: this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub,
+                case: this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub,
                 description: this.$store.state.description,
                 file1: this.$store.state.file1
                 
