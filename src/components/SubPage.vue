@@ -20,18 +20,27 @@
                     </b-form-group>  
                 </div>
                <div class="enclose sidebg">
-<!--                     <label> Insert Picture <span style="color:red">*</span> </label>
+                    <label> Insert Picture <span style="color:red">*</span> </label> <br><br>
+                    <div class="filecon">
+                        <img src="../assets/browse.png" alt="Upload" width="30px">
+                        <label for="upload-photo" class="browselabel"> Browse </label>
+                        <input type="file" name="photo" id="upload-photo" accept="image/jpeg, image/png, image/gif" />
+                    </div>
+                    
+                    
+<!--                
                      <b-form-group label-for="form-image" label-cols-lg="2">
                         <b-input-group>
                             <b-input-group-prepend is-text>
                                 <b-icon icon="image-fill"></b-icon>
                             </b-input-group-prepend>
                             <b-form-file id="form-image" accept="image/*"></b-form-file>
+                            <input type="file">
                         </b-input-group>
-                    </b-form-group> -->
-                <label> Insert Picture <span style="color:red">*</span> </label><br><br>
-                <input id="f_file" type="file" />
-                <input id="f_hidden" type="hidden" value="hidden-field-value" />
+                    </b-form-group>
+               <label> Insert Picture <span style="color:red">*</span> </label><br><br>
+                 <input id="f_file" type="file" />
+                <input id="f_hidden" type="hidden" value="hidden-field-value" /> -->
                 </div>
                 <b-row>
                     <b-col cols="4">
@@ -176,5 +185,25 @@ form-file {
 
 .drivebutton {
   width: 40%;
+}
+
+.filecon {
+    border: 1px solid pink;
+    width: 150px;
+    text-align: center;
+    border-radius: 10px 10px;
+}
+
+.browselabel {
+   cursor: pointer;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   font-size: 20px;
+   padding: 15px;
+}
+
+#upload-photo {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
 }
 </style>
