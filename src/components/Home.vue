@@ -6,7 +6,7 @@
               <div class="enclose headerbg">
                 <Header />
               </div>
-              <form @submit.prevent="issue()" ref="myForm">
+              <form @submit.prevent="issue()" ref="myForm" autocomplete="off">
                 <div class="enclose sidebg">
                     <b-form-group
                     id="email"
@@ -76,7 +76,7 @@
                 <b-row>
                     <b-col cols="4">
                       <b-nav pills>
-                        <b-button variant="danger" type="submit" active> Next </b-button>
+                        <b-button variant="danger" type="submit" active :disabled="clicked"> Next </b-button>
                       </b-nav>
                     </b-col>
                     <b-col cols="3">
@@ -109,11 +109,12 @@ export default {
         email: '',
         office: '',
         client: '',
-        number: '',
+        number: 19,
         selectProblem: '',
         issues: [],
         offices: [],
-        value: 33.33
+        value: 33.33,
+        clicked: false
       }
     },
     validations: {
@@ -141,13 +142,13 @@ export default {
       },
       onSelectRad() {
         if(this.selectProblem == 'Software'){
-            this.$router.push({ path: '/software'})
+            setTimeout( () => this.$router.push({ path: '/software'}), 1000) 
         }
         else if (this.selectProblem == 'Hardware'){
-            this.$router.push({ path: '/hardware'})
+            setTimeout ( () => this.$router.push({ path: '/hardware'}), 1000) 
         }
         else if (this.selectProblem == 'Connectivity'){
-            this.$router.push({ path: '/connectivity'})
+            setTimeout( () => this.$router.push({ path: '/connectivity'}), 1000)
         }
       },
       issue() {
@@ -166,6 +167,7 @@ export default {
 
           this.onSelectRad()
       },
+
       clearForm(){
         alert('Clear Form')
         this.$refs.myForm.reset()

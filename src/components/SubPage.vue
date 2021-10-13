@@ -20,27 +20,25 @@
                     </b-form-group>  
                 </div>
                <div class="enclose sidebg">
-                    <label> Insert Picture <span style="color:red">*</span> </label> <br><br>
-                    <div class="filecon">
+                    <label> Insert Picture <span style="color:red">*</span> </label> <br>
+<!--                     <div class="filecon">
                         <img src="../assets/browse.png" alt="Upload" width="30px">
                         <label for="upload-photo" class="browselabel"> Browse </label>
                         <input type="file" name="photo" id="upload-photo" accept="image/jpeg, image/png, image/gif" />
-                    </div>
-                    
-                    
-<!--                
-                     <b-form-group label-for="form-image" label-cols-lg="2">
-                        <b-input-group>
-                            <b-input-group-prepend is-text>
-                                <b-icon icon="image-fill"></b-icon>
-                            </b-input-group-prepend>
-                            <b-form-file id="form-image" accept="image/*"></b-form-file>
-                            <input type="file">
-                        </b-input-group>
-                    </b-form-group>
-               <label> Insert Picture <span style="color:red">*</span> </label><br><br>
-                 <input id="f_file" type="file" />
-                <input id="f_hidden" type="hidden" value="hidden-field-value" /> -->
+                    </div> -->
+                    <b-row>
+                        <b-col cols="5">
+                            <div class="fileContainer">
+                                <img src="../assets/browse.png" alt="Upload" width="30px">
+                                Select image
+                                <input type="file" class="file-upload" id="file" name="file" @change="fileSelected" accept="image/jpeg, image/png, image/gif">
+                            </div>
+                        </b-col>
+                        <b-col cols="4">
+                            <p class="fileInfo" v-if="!files || !files.length">No image selected</p>
+                            <p class="fileName" v-else v-for="file in files" :key="file.name">{{file.name}}</p>
+                        </b-col>
+                    </b-row>
                 </div>
                 <b-row>
                     <b-col cols="4">
@@ -78,7 +76,7 @@ export default {
     data() {
         return {
             value: 100,
-            file: null,
+            files: null,
             description: ''
         }
     },
@@ -101,11 +99,12 @@ export default {
             this.file1 =  formData */
 
             const temp = {
-                file1: this.file1,
+                files: this.files,
                 description: this.description
             }
             this.$store.commit('subStore', temp)
-            this.$router.push({ path: '/finalpage'})
+
+            setTimeout( () => this.$router.push({ path: '/finalpage'}),1000)
 
             this.$v.$touch()
             if (this.$v.$pendding || this.$v.$error) return
@@ -123,7 +122,7 @@ export default {
                 selectProblem: this.$store.state.selectProblem,
                 case: this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub,
                 description: this.$store.state.description,
-                file1: this.$store.state.file1
+                files: this.$store.state.files
                 
             }
             console.log(this.$store.state.email, 'Email')
@@ -132,7 +131,7 @@ export default {
             console.log(issue)
         },
         store() {
-            this.file = this.$store.state.file
+            this.files = this.$store.state.files
             this.description = this.$store.state.file
         },
 
@@ -140,6 +139,9 @@ export default {
             alert('Clear Form')
             this.$refs.myForm.reset()
         },
+        fileSelected(e) {
+            this.files = e.target.files
+        }
     }
 }
 </script>
@@ -185,25 +187,53 @@ form-file {
 
 .drivebutton {
   width: 40%;
+  text-align: center;
 }
 
-.filecon {
-    border: 1px solid pink;
-    width: 150px;
-    text-align: center;
-    border-radius: 10px 10px;
+.fileContainer {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid pink;
+  color: #111;
+  padding: 6px 18px;
+  border-radius: 7px;
+  line-height: 40px;
+  text-align: center;
 }
 
-.browselabel {
-   cursor: pointer;
-   font-family: Georgia, 'Times New Roman', Times, serif;
-   font-size: 20px;
-   padding: 15px;
+form input, textarea {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #d9dadc;
+  border-radius: 7px;
+  font-size: 16px;
+  color: #393645;
+  resize: none;
 }
 
-#upload-photo {
-   opacity: 0;
-   position: absolute;
-   z-index: -1;
+.fileContainer [type=file] {
+  cursor: pointer;
+  display: block;
+  font-size: 13px;
+  filter: alpha(opacity=0);
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  text-align: right;
+  top: -8px;
+} 
+
+.fileInfo {
+  font-size: 15px;
+  color: #a9a7a9;
+  line-height: 40px;
+}
+
+.fileName {
+  font-size: 15px;
+  color: black;
+  line-height: 40px;
 }
 </style>

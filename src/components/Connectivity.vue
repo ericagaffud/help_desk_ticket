@@ -71,7 +71,7 @@ export default {
         onConnectSelect(connectivitySub) {
             if(connectivitySub) {
                 this.$store.commit('connectivityStore', {connectivitySub: this.connectivitySub}) 
-                this.$router.push({ path: '/subpage'})
+                setTimeout( () => this.$router.push({ path: '/subpage'}),1000)
             }
             console.log('No data')
             this.$v.$touch()

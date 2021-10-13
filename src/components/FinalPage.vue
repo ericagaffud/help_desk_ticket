@@ -16,6 +16,7 @@
                         <h6> Name: </h6>
                         <h6> Phone Number: </h6>
                         <h6> Problem Category </h6>
+                        <h6><span style="margin-left:20px"></span> Subject:</h6>
                         <h6><span style="margin-left:20px"></span> Issue:</h6>
                         <h6><span style="margin-left:20px"></span> Description:</h6>
                         <h6><span style="margin-left:20px"></span> Picture:</h6>
@@ -26,6 +27,7 @@
                         <input disabled type="text" :value="this.$store.state.client"><br>
                         <input disabled type="text" :value="this.$store.state.number"><br>
                         <br><br>
+                        <input disabled type="text" :value="this.$store.state.selectProblem">
                         <input disabled type="text" :value="this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub"><br>
                         <input disabled type="text" :value="this.$store.state.description"><br>
                         <input disabled type="text" :value="this.$store.statepicture">
@@ -37,7 +39,7 @@
                     <b-col></b-col>
                     <b-col cols="11">
                         <br>
-                        <b-button variant="danger" to="/">
+                        <b-button variant="danger" to="/" @click="reloadPage">
                             Submit Another Response
                         </b-button>
                         <br><br>
@@ -65,6 +67,9 @@ export default {
         Header
     },
     methods: {
+        reloadPage() {
+            window.location.reload();
+        }
     }
 }
 </script>

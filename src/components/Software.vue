@@ -75,7 +75,7 @@ export default {
         onSoftwareSelect(softwareSub) {
             if(softwareSub) {
                 this.$store.commit('softwareStore', {softwareSub: this.softwareSub})
-                this.$router.push({ path: '/subpage'})
+                setTimeout( () => this.$router.push({ path: '/subpage'}), 1000) 
             }
             console.log('No data')
 

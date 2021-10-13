@@ -72,7 +72,7 @@ export default {
         onHardwareSelect(hardwareSub) {
             if(hardwareSub) {
                 this.$store.commit('hardwareStore', {hardwareSub: this.hardwareSub})
-                this.$router.push({ path: '/subpage'})
+                setTimeout( () => this.$router.push({ path: '/subpage'}), 1000) 
             }
             console.log('No data')
             this.$v.$touch()
