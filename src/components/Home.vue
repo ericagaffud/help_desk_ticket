@@ -50,16 +50,25 @@
                     </b-form-group>      
                 </div>
 
-                <div class="enclose sidebg">
+<!--                 <div class="enclose sidebg">
                     <b-form-group
                     id="number"
                     description="Please enter a valid number"
                     label-for="number"
                     >
                     <label> Phone Number <span style="color:red">*</span> </label>
-                    <b-form-input id="number" name="number" v-model="number" v-model.trim="$v.number.$model" :class="{'is-invalid': validationStatus($v.number)}"></b-form-input>
+                    <b-input id="number" name="number" v-model="number" v-model.trim="$v.number.$model" :class="{'is-invalid': validationStatus($v.number)}"></b-input>
                     <div v-if="!$v.number.required" class="invalid-feedback">This field is required.</div>
                     </b-form-group>
+                </div> -->
+
+                <div class="enclose sidebg">
+                  <label> Phone Number <span style="color:red">*</span> </label>
+                  <p class="plabel">Please enter a valid number</p>
+                  <input type="text" maxlength="11" v-model="phone">
+                  <p v-if="errors.length">
+                    <span v-for="error in errors" :key="error in errors" class="phoneinvalid"> {{error}} </span>
+                  </p> 
                 </div>
 
                 <div class="enclose sidebg">
@@ -98,30 +107,34 @@
 <script>
 import Header from './Header.vue'
 import { required } from 'vuelidate/lib/validators'
+import { mapState } from 'vuex'
 
 export default {
     name: 'Home',
     components: {
         Header
     },
+    computed: {
+      ...mapState(["phone"])
+    },
     data: function() {
       return {
         email: '',
         office: '',
         client: '',
-        number: 19,
+        phone: this.phone,
         selectProblem: '',
         issues: [],
         offices: [],
         value: 33.33,
-        clicked: false
+        clicked: false,
+        errors: []
       }
     },
     validations: {
       email: { required },
       office: { required },
       client: { required },
-      number: { required },
       selectProblem: { required }
     },
     mounted: function() {
@@ -152,15 +165,13 @@ export default {
         }
       },
       issue() {
-          this.$v.$touch()
-          if (this.$v.$pendding || this.$v.$error) return
-          this.$v.$reset()
+        this.formValidation()
 
           const temp = {
             email: this.email,
             office: this.office,
             client: this.client, 
-            number: this.number, 
+            phone: this.phone, 
             selectProblem: this.selectProblem
           }
           this.$store.commit('homeStore', temp)
@@ -168,6 +179,23 @@ export default {
           this.onSelectRad()
       },
 
+      formValidation(e) {
+        this.errors = []
+        
+        if (this.phone == '09' || this.phone.length != 11) {
+          this.errors.push('Invalid Phone Number. Please enter 11 numbers.')
+        }
+
+        if (!this.errors.length) {
+          return true
+        }
+        this.$v.$touch()
+        if (this.$v.$pendding || this.$v.$error) return
+        this.$v.$reset()    
+
+        e.preventDefault()
+    
+      },
       clearForm(){
         alert('Clear Form')
         this.$refs.myForm.reset()
@@ -176,7 +204,7 @@ export default {
         this.email = this.$store.state.email
         this.office = this.$store.state.office
         this.client = this.$store.state.client
-        this.number = this.$store.state.number
+        this.phone = this.$store.state.phone
         this.selectProblem = this.$store.state.selectProblem
       }
     }
@@ -227,4 +255,9 @@ button {
   width: 100%;
 }
 
+.phoneinvalid {
+  color: #dc3545;
+  font-size: 80%;
+  margin-top: .25rem;
+}
 </style>

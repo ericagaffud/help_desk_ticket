@@ -7,7 +7,7 @@ export default new Vuex.Store({
         email: '',
         office: '',
         client: '',
-        number: '',
+        phone: '09',
         selectProblem: '',
         softwareSub: '',
         hardwareSub: '',
@@ -22,7 +22,7 @@ export default new Vuex.Store({
         state.email = payload.email
         state.office = payload.office
         state.client = payload.client
-        state.number = payload.number
+        state.phone = payload.phone
         state.selectProblem = payload.selectProblem
 
       },
