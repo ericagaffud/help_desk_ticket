@@ -15,26 +15,31 @@
                   head-row-variant="danger"
                   >
                     <template #cell(details)="row">
-                        <b-button size="sm" @click="row.toggleDetails" class="mr-2">
+                        <b-button size="sm" @click="row.toggleDetails" class="mr-2" variant="danger">
                             {{ row.detailsShowing ? 'Hide' : 'Show'}} Info
                         </b-button>
                     </template>
                     
                     <template #row-details="row">
-                        <b-card>
+                        <b-card class="tab">
                             <b-row class="mb-2">
-                                <b-col sm="3" class="text-sm-right"><b>Email:</b></b-col>
-                                <b-col>{{ row.email }}</b-col>
+                                <b-col sm="3" class="text-sm-right"><b>Subject:</b></b-col>
+                                <b-col>{{ row.item.selectProblem }}</b-col>
                             </b-row>
 
                             <b-row class="mb-2">
-                                <b-col sm="3" class="text-sm-right"><b>Office:</b></b-col>
-                                <b-col>{{ row.office }}</b-col>
+                                <b-col sm="3" class="text-sm-right"><b>Case:</b></b-col>
+                                <b-col>{{ row.item.case }}</b-col>
                             </b-row>
 
                             <b-row class="mb-2">
-                                <b-col sm="3" class="text-sm-right"><b>Job:</b></b-col>
-                                <b-col>{{ row.job }}</b-col>
+                                <b-col sm="3" class="text-sm-right"><b>Description:</b></b-col>
+                                <b-col>{{ row.item.description }}</b-col>
+                            </b-row>
+
+                            <b-row class="mb-2">
+                                <b-col sm="3" class="text-sm-right"><b>Picture:</b></b-col>
+                               <!--  <b-col>{{ row.item.description }}</b-col> -->
                             </b-row>
                         </b-card>
                     </template>
@@ -61,9 +66,11 @@ export default {
             fields: [
                 { key: 'id', label: 'ID' },
                 { key: 'client', label: 'Client Name' },
-/*                 { key: 'email', label: 'Email' },
-                { key: 'office', label: 'Office' },
-                { key: 'job', label: 'Job' }, */
+                 { key: 'email', label: 'Email' },
+/*                { key: 'office', label: 'Office' },
+                { key: 'selectProblem', label: 'Subject' },
+                { key: 'case', label: 'Case'},
+                { key: 'description', label: 'Description' }, */
                 'details'
             ],
             issues: []
@@ -100,5 +107,9 @@ export default {
 h4 {
     text-align: center;
     font-family: sans-serif;
+}
+
+.tab {
+    background-color: rgba(255, 192, 203, 0.308);
 }
 </style>

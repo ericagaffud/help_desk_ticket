@@ -16,8 +16,8 @@
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Monitor" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Monitor </b-form-radio><br>
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Mouse" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Mouse </b-form-radio><br>
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Printer" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Printer </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Others" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
-                        <b-input id="other" name="other"></b-input>
+                        <b-form-radio @change="enableInputOthers()" :aria-describedby="ariaDescribedby" v-model="hardwareSub" name="some-radios" value="Others" v-model.trim="$v.hardwareSub.$model" :class="{'is-invalid': validationStatus($v.hardwareSub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
+                        <b-input id="inputOthers" name="inputOthers" ref="inputOthers" type="text"></b-input>
                         <div v-if="!$v.hardwareSub.required" class="invalid-feedback"> Please choose one</div>
                     </b-form-group>
                 </div>
@@ -86,6 +86,10 @@ export default {
             alert('Clear Form')
             this.$refs.myForm.reset()
         },
+        enableInputOthers: function() {
+            this.$refs.inputOthers.focus();
+            console.log('Focus on me')
+        }
     },
 }
 </script>

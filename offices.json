@@ -234,34 +234,24 @@
   ],
   "issues": [
     {
-      "email": "erica@gmail.com",
-      "office": "Provincial Budget's Office",
-      "client": "ecaaaa1",
-      "number": "0999999",
+      "email": "ericadurangaffud@gmail.com",
+      "office": "Provincial Health Office",
+      "client": "Erica Gaffud",
+      "phone": "09553805164",
       "selectProblem": "Connectivity",
-      "case": "Forgot WiFi Password",
-      "description": "My baad",
+      "case": "Unstable Internet Connection",
+      "description": "I have unstable internet connection. My signal goes stable and unstable at times. This problem keeps me unable to work well and do my task.",
       "id": 1
     },
     {
-      "email": "erica@gmail.com",
-      "office": "Provincial Disaster and Risk Reduction Management Office",
-      "client": "ecaaaa2",
-      "number": "0999999",
-      "selectProblem": "Software",
-      "case": "Others",
-      "description": "anything",
+      "email": "christinejoy@gmail.com",
+      "office": "Provincial Motorpool Office",
+      "client": "Christine Joy",
+      "phone": "09551463281",
+      "selectProblem": "Hardware",
+      "case": "Printer",
+      "description": "My printer isn't working. I can't seem to find out why.",
       "id": 2
-    },
-    {
-      "email": "erica@gmail.com",
-      "office": "Provincial Disaster and Risk Reduction Management Office",
-      "client": "ecaaaa3",
-      "number": "0999999",
-      "selectProblem": "Connectivity",
-      "case": "Unstable Internet Connection",
-      "description": "My baaad",
-      "id": 3
     }
   ]
 }

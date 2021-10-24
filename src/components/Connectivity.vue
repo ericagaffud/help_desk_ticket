@@ -13,8 +13,9 @@
                         <p class="plabel"> <span style="color:red">*</span> Choose multiple option if necessary </p>
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="No Internet Connection" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> No Internet Connection </b-form-radio><br>
                         <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="Forgot WiFi Password" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Forgot WiFi Password </b-form-radio><br>
-                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="Unstable Internet Connection" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Unstable Internet Connectivity </b-form-radio>
-                        <b-input id="other" name="other"></b-input>
+                        <b-form-radio :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="Unstable Internet Connection" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Unstable Internet Connectivity </b-form-radio><br>
+                        <b-form-radio @change="enableInputOthers()" type="button" :aria-describedby="ariaDescribedby" v-model="connectivitySub" name="some-radios" value="Others" v-model.trim="$v.connectivitySub.$model" :class="{'is-invalid': validationStatus($v.connectivitySub)}"> <span style="margin-left:10px"></span> Others: </b-form-radio>
+                        <b-input id="inputOthers" name="inputOthers" ref="inputOthers" type="text"></b-input>
                         <div v-if="!$v.connectivitySub.required" class="invalid-feedback"> Please choose one</div>
                     </b-form-group>
                 </div>
@@ -85,6 +86,10 @@ export default {
             alert('Clear Form')
             this.$refs.myForm.reset()
         },
+        enableInputOthers: function() {
+            this.$refs.inputOthers.focus();
+            console.log('Focus on me')
+        }
     },
 }
 </script>

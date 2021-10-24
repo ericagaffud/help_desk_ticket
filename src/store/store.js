@@ -12,7 +12,7 @@ export default new Vuex.Store({
         softwareSub: '',
         hardwareSub: '',
         connectivitySub: '',
-        file1: null, 
+        selectedFile: null, 
         description: '' 
     },
 
@@ -40,7 +40,7 @@ export default new Vuex.Store({
       },
 
       subStore(state, payload){
-        state.file1 = payload.file1
+        state.selectedFile = payload.selectedFile
         state.description = payload.description
       }
       

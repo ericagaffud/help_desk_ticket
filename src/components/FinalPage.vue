@@ -2,12 +2,12 @@
   <b-container>
       <b-row>
           <b-col></b-col>
-          <b-col cols="6">
+          <b-col cols="7">
             <div class="enclose headerbg">
                 <Header />
             </div>
             <div class="enclose sidebg">
-                <h4>Your response was being submitted.</h4>
+                <h4>Your response has been submitted.</h4>
                 <p>These are your submitted data.</p><br>
                 <b-row>
                     <b-col>
@@ -18,19 +18,19 @@
                         <h6> Problem Category </h6>
                         <h6><span style="margin-left:20px"></span> Subject:</h6>
                         <h6><span style="margin-left:20px"></span> Issue:</h6>
-                        <h6><span style="margin-left:20px"></span> Description:</h6>
+                        <h6><span style="margin-left:20px"></span> Description:</h6><br>
                         <h6><span style="margin-left:20px"></span> Picture:</h6>
                     </b-col>
-                    <b-col cols="8">
+                    <b-col cols="9">
                         <input disabled type="text" :value="this.$store.state.email"><br>
                         <input disabled type="text" :value="this.$store.state.office"><br>
                         <input disabled type="text" :value="this.$store.state.client"><br>
-                        <input disabled type="text" :value="this.$store.state.number"><br>
+                        <input disabled type="text" :value="this.$store.state.phone"><br>
                         <br><br>
                         <input disabled type="text" :value="this.$store.state.selectProblem">
                         <input disabled type="text" :value="this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub"><br>
-                        <input disabled type="text" :value="this.$store.state.description"><br>
-                        <input disabled type="text" :value="this.$store.statepicture">
+                        <b-form-textarea plaintext disabled :value="this.$store.state.description"></b-form-textarea><br>
+                        <input disabled type="text" :value="this.$store.state.picture">
                     </b-col>
                 </b-row>
             </div>
@@ -98,8 +98,18 @@ export default {
 
 input {
     margin: 6px;
-    width: 90%;
+    width: 95%;
     cursor: text;
+    background-color: rgba(255, 192, 203, 0.253);
+    border:1px solid pink;
+}
+
+textarea {
+    width: 95%;
+    cursor: text;
+    margin: 5px;
+    background-color: rgba(255, 192, 203, 0.253);
+    border:1px solid pink;
 }
 
 h6 {

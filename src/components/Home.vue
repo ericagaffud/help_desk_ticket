@@ -10,10 +10,10 @@
                 <div class="enclose sidebg">
                     <b-form-group
                     id="email"
-                    description="Please enter a valid email"
                     label-for="email"
                     >
                       <label> Email <span style="color:red">*</span> </label>
+                      <p class="plabel">Please enter a valid email</p>
                       <b-form-input id="email" name="email" v-model="email" v-model.trim="$v.email.$model" :class="{'is-invalid': validationStatus($v.email)}"></b-form-input>
                       <div v-if="!$v.email.required" class="invalid-feedback">This field is required.</div>
                     </b-form-group>
@@ -28,7 +28,6 @@
                         id="office"
                         name="office"
                         class="w-75 p-2"
-                        label-cols-lg="4"
                         v-model="office"
                         v-model.trim="$v.office.$model"
                         :class="{'is-invalid': validationStatus($v.office)}">
@@ -65,7 +64,8 @@
                 <div class="enclose sidebg">
                   <label> Phone Number <span style="color:red">*</span> </label>
                   <p class="plabel">Please enter a valid number</p>
-                  <input type="text" maxlength="11" v-model="phone">
+                  <input type="text" maxlength="11" v-model="phone" @keypress="acceptNumber($event)">
+                  
                   <p v-if="errors.length">
                     <span v-for="error in errors" :key="error in errors" class="phoneinvalid"> {{error}} </span>
                   </p> 
@@ -181,7 +181,9 @@ export default {
 
       formValidation(e) {
         this.errors = []
-        
+        if(this.office == "") {
+          this.errors.push('Please Select')
+        }
         if (this.phone == '09' || this.phone.length != 11) {
           this.errors.push('Invalid Phone Number. Please enter 11 numbers.')
         }
@@ -196,6 +198,15 @@ export default {
         e.preventDefault()
     
       },
+       acceptNumber: function(evt) {
+          evt = (evt) ? evt : window.event;
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+            evt.preventDefault();
+          } else {
+            return true;
+          }
+        },
       clearForm(){
         alert('Clear Form')
         this.$refs.myForm.reset()
@@ -206,7 +217,7 @@ export default {
         this.client = this.$store.state.client
         this.phone = this.$store.state.phone
         this.selectProblem = this.$store.state.selectProblem
-      }
+      },
     }
 }
 </script>

@@ -31,12 +31,13 @@
                             <div class="fileContainer">
                                 <img src="../assets/browse.png" alt="Upload" width="30px">
                                 Select image
-                                <input type="file" class="file-upload" id="file" name="file" @change="fileSelected" accept="image/jpeg, image/png, image/gif">
+                                <input type="file" class="file-upload" id="file" name="file" @change="onFileSelected" accept="image/jpeg, image/png, image/gif">
                             </div>
+                            
                         </b-col>
                         <b-col cols="4">
-                            <p class="fileInfo" v-if="!files || !files.length">No image selected</p>
-                            <p class="fileName" v-else v-for="file in files" :key="file.name">{{file.name}}</p>
+                            <p class="fileInfo" v-if="!selectedFile || !selectedFile.length">No image selected</p>
+                            <p class="fileName" v-else v-for="file in selectedFile" :key="file.name"> {{file.name}} </p>
                         </b-col>
                     </b-row>
                 </div>
@@ -67,6 +68,7 @@
 import Header from './Header.vue'
 import { required } from 'vuelidate/lib/validators'
 import { myIssue } from './ThisMethods'
+import axios from 'axios'
 
 export default {
     name: 'SubPage',
@@ -76,7 +78,7 @@ export default {
     data() {
         return {
             value: 100,
-            files: null,
+            selectedFile: null,
             description: ''
         }
     },
@@ -97,9 +99,10 @@ export default {
            /*  let formData = new FormData() 
             formData.append("photo", this.$refs.fileStore.files[0])
             this.file1 =  formData */
-
+            
+            
             const temp = {
-                files: this.files,
+                selectedFile: this.selectedFile,
                 description: this.description
             }
             this.$store.commit('subStore', temp)
@@ -118,29 +121,45 @@ export default {
                 email: this.$store.state.email,
                 office: this.$store.state.office,
                 client: this.$store.state.client,
-                number: this.$store.state.number,
+                phone: this.$store.state.phone,
                 selectProblem: this.$store.state.selectProblem,
                 case: this.$store.state.softwareSub || this.$store.state.hardwareSub || this.$store.state.connectivitySub,
                 description: this.$store.state.description,
-                files: this.$store.state.files
-                
+                selectedFile: this.$store.state.selectedFile
             }
-            console.log(this.$store.state.email, 'Email')
+            this.uploadFile()
 
             const issue = await myIssue(newIssue)
             console.log(issue)
         },
-        store() {
-            this.files = this.$store.state.files
-            this.description = this.$store.state.file
+        onFileSelected(event) {
+            this.selectedFile = event.target.files
+            console.log(event)
         },
 
+        uploadFile() {
+            let fd = new FormData()
+            fd.append('image', this.selectedFile, this.selectedFile.name)
+            axios.post('http://localhost:5000/issues',
+                fd, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function() {
+                    console.log('SUCCESS')
+                })
+                .catch(function() {
+                    console.log('FAIL')
+                })
+        },
+        store() {
+            this.selectedFile = this.$store.state.selectedFile
+            this.description = this.$store.state.description
+        },
         clearForm(){
             alert('Clear Form')
             this.$refs.myForm.reset()
-        },
-        fileSelected(e) {
-            this.files = e.target.files
         }
     }
 }
