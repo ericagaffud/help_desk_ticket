@@ -33,8 +33,8 @@
                         :class="{'is-invalid': validationStatus($v.office)}">
                         <option value=""> Select Office </option>
                         <option :value="office.name" :key="office.name" v-for="office in offices"> {{ office.name }} </option>
-                        <div v-if="!$v.office.required" class="invalid-feedback">This field is required.</div>
                     </b-form-select>
+                    <div v-if="!$v.office.required" class="invalid-feedback">This field is required.</div>
                     </b-form-group><br>
                 </div>
 

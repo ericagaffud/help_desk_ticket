@@ -252,6 +252,43 @@
       "case": "Printer",
       "description": "My printer isn't working. I can't seem to find out why.",
       "id": 2
+    },
+    {
+      "email": "roseannpillien@gmail.com",
+      "office": "Chief of Staff Office",
+      "client": "Rose Ann",
+      "phone": "09772566382",
+      "selectProblem": "Connectivity",
+      "case": "Others",
+      "description": "I didn't subscribe yet to any internet",
+      "selectedFile": null,
+      "id": 3
+    },
+    {
+      "email": "reyhellamug@gmail.com",
+      "office": "Local Economic and Investment Promotion Office",
+      "client": "Reyhel Lamug",
+      "phone": "09062627272",
+      "selectProblem": "Hardware",
+      "case": "Others",
+      "description": "Work is not easy. I need an scanner to scan and directly print everything",
+      "selectedFile": {
+        "0": {}
+      },
+      "id": 4
+    },
+    {
+      "email": "junjunduran@gmail.com",
+      "office": "Provincial Budget's Office",
+      "client": "John Duran",
+      "phone": "09668383723",
+      "selectProblem": "Hardware",
+      "case": "Mouse",
+      "description": "My wireless mouse battery is not functioning",
+      "selectedFile": {
+        "0": {}
+      },
+      "id": 5
     }
   ]
 }

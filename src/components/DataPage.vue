@@ -23,6 +23,16 @@
                     <template #row-details="row">
                         <b-card class="tab">
                             <b-row class="mb-2">
+                                <b-col sm="3" class="text-sm-right"><b>Office:</b></b-col>
+                                <b-col>{{ row.item.office }}</b-col>
+                            </b-row>
+
+                            <b-row class="mb-2">
+                                <b-col sm="3" class="text-sm-right"><b>Phone Number:</b></b-col>
+                                <b-col>{{ row.item.phone }}</b-col>
+                            </b-row>
+
+                            <b-row class="mb-2">
                                 <b-col sm="3" class="text-sm-right"><b>Subject:</b></b-col>
                                 <b-col>{{ row.item.selectProblem }}</b-col>
                             </b-row>
@@ -39,7 +49,7 @@
 
                             <b-row class="mb-2">
                                 <b-col sm="3" class="text-sm-right"><b>Picture:</b></b-col>
-                               <!--  <b-col>{{ row.item.description }}</b-col> -->
+                                <b-col>{{ row.item.selectedFile }}</b-col>
                             </b-row>
                         </b-card>
                     </template>

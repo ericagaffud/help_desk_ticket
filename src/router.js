@@ -6,8 +6,6 @@ import Connectivity from './components/Connectivity.vue'
 import SubPage from './components/SubPage.vue'
 import FinalPage from './components/FinalPage.vue'
 import DataPage from './components/DataPage.vue'
-import Upload from './components/upload.vue'
-
 
 Vue.use(Router)
 
@@ -46,11 +44,6 @@ const routes = [
         path: '/software',
         name: 'Software',
         component: () => import('./components/Software.vue')
-    },
-    {
-        path: '/upload',
-        name: Upload,
-        component: Upload
     }
 ]
 

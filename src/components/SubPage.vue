@@ -21,11 +21,6 @@
                 </div>
                <div class="enclose sidebg">
                     <label> Insert Picture <span style="color:red">*</span> </label> <br>
-<!--                     <div class="filecon">
-                        <img src="../assets/browse.png" alt="Upload" width="30px">
-                        <label for="upload-photo" class="browselabel"> Browse </label>
-                        <input type="file" name="photo" id="upload-photo" accept="image/jpeg, image/png, image/gif" />
-                    </div> -->
                     <b-row>
                         <b-col cols="5">
                             <div class="fileContainer">
@@ -69,7 +64,6 @@ import Header from './Header.vue'
 import { required } from 'vuelidate/lib/validators'
 import { myIssue } from './ThisMethods'
 import axios from 'axios'
-
 export default {
     name: 'SubPage',
     components: {
@@ -85,16 +79,13 @@ export default {
     validations: {
         description: { required }
     },
-
     mounted: function() {
         this.store()
     },
-
     methods: {
         validationStatus: function(validation) {
             return typeof validation != "undefined" ? validation.$error : false;
         },
-
         onFinal() {
            /*  let formData = new FormData() 
             formData.append("photo", this.$refs.fileStore.files[0])
@@ -106,15 +97,14 @@ export default {
                 description: this.description
             }
             this.$store.commit('subStore', temp)
-
             setTimeout( () => this.$router.push({ path: '/finalpage'}),1000)
-
             this.$v.$touch()
             if (this.$v.$pendding || this.$v.$error) return
             this.$v.$reset()
             alert('Submit')
             
             this.submitIssue()
+            this.uploadFile()
         },
         async submitIssue() {
             const newIssue = {
@@ -127,8 +117,7 @@ export default {
                 description: this.$store.state.description,
                 selectedFile: this.$store.state.selectedFile
             }
-            this.uploadFile()
-
+            
             const issue = await myIssue(newIssue)
             console.log(issue)
         },
@@ -136,7 +125,6 @@ export default {
             this.selectedFile = event.target.files
             console.log(event)
         },
-
         uploadFile() {
             let fd = new FormData()
             fd.append('image', this.selectedFile, this.selectedFile.name)
@@ -144,7 +132,8 @@ export default {
                 fd, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
-                    }
+                    },
+                    body: JSON.stringify()
                 })
                 .then(function() {
                     console.log('SUCCESS')
@@ -172,43 +161,34 @@ export default {
   margin: 10px;
   padding: 25px 25px;
 }
-
 .plabel {
   font-size: small;
 }
-
 .progress {
   background-color: gray;
 }
-
 .row {
   margin: 10px;
 }
-
 input {
     outline: 0;
     border-width: 0 0 2px;
     border-color: gainsboro;
 }
-
 .headerbg {
     border: solid pink;
     border-width: 15px 1px 1px;
 }
-
 .sidebg {
     border:1px solid pink;
 }
-
 form-file {
     align-items: center;
 }
-
 .drivebutton {
   width: 40%;
   text-align: center;
 }
-
 .fileContainer {
   overflow: hidden;
   position: relative;
@@ -219,7 +199,6 @@ form-file {
   line-height: 40px;
   text-align: center;
 }
-
 form input, textarea {
   background-color: #fff;
   padding: 10px;
@@ -229,7 +208,6 @@ form input, textarea {
   color: #393645;
   resize: none;
 }
-
 .fileContainer [type=file] {
   cursor: pointer;
   display: block;
@@ -243,13 +221,11 @@ form input, textarea {
   text-align: right;
   top: -8px;
 } 
-
 .fileInfo {
   font-size: 15px;
   color: #a9a7a9;
   line-height: 40px;
 }
-
 .fileName {
   font-size: 15px;
   color: black;
